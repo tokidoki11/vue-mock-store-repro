@@ -15,7 +15,7 @@ import {
 } from "@vue/composition-api";
 export default defineComponent({
   setup(_, context) {
-    let focusWatcher = null;
+    let focusWatcher: () => void
     const data = reactive({
       item: computed(() => context.root.$store.getters["count"])
     });
@@ -34,7 +34,7 @@ export default defineComponent({
     });
 
     onBeforeUnmount(()=>{
-      if(focusWatcher !== null) focusWatcher()
+      focusWatcher()
     })
 
     return { ...toRefs(data), add };
